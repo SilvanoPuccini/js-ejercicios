@@ -1,22 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Ejercicio 9 - ToDo</title>
-    <link rel="stylesheet" href="src/css/styles.css" />
-  </head>
-  <body>
-    <h1>Lista de Tareas</h1>
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 9 - Lista de Tareas</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
 
-    <input type="text" id="taskInput" placeholder="Nueva tarea" />
-    <button id="addTaskBtn">Agregar</button>
+  <div class="container">
+    <div class="card">
+      <h1>Lista de Tareas</h1>
+      <p class="subtitle">Las tareas se guardan automáticamente</p>
 
-    <ul id="taskList"></ul>
+      <div class="exercise-content">
+        <input type="text" id="taskInput" placeholder="Nueva tarea">
+        <button id="addTaskBtn" class="action-btn">Agregar tarea</button>
+      </div>
 
-    <div class="back">
-      <a href="index.html">⬅ Volver al menú</a>
+      <ul id="taskList"></ul>
+
+      <div class="exercise-content">
+        <button id="clearCompletedBtn" class="action-btn">
+          Limpiar tareas completadas
+        </button>
+      </div>
+
+      <a href="index.html" class="back">← Volver al menú</a>
     </div>
+  </div>
 
-    <script src="src/js/ejercicio9.js"></script>
-  </body>
+  <script src="src/js/ejercicio9.js"></script>
+</body>
 </html>
+
