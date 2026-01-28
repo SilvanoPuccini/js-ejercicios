@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     list.innerHTML = "";
 
     tasks.forEach((task, index) => {
+      if (!task.text) return;
       const li = document.createElement("li");
 
       const checkbox = document.createElement("input");
