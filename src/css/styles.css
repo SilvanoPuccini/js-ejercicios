@@ -1,0 +1,468 @@
+/* ===== VARIABLES GLOBALES ===== */
+:root {
+  --primary-color: #2563eb;
+  --primary-dark: #1e40af;
+  --secondary-color: #64748b;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  --light-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --transition: 0.3s ease all;
+}
+
+/* ===== RESET Y ESTILOS BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* Gradiente solo para ejercicios que NO sean el 1 */
+body:not(:has(.container)) {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Contenedor más pequeño solo para ejercicio 1 (sin menú) */
+.container:not(:has(.menu)) {
+  max-width: 420px;
+}
+
+/* ===== TARJETAS ===== */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+/* ===== TIPOGRAFÍA ===== */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* ===== MENÚ PRINCIPAL ===== */
+.menu {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  display: block;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  text-align: center;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  border: none;
+}
+
+.menu a:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #1e3a8a 100%);
+}
+
+.menu a:active {
+  transform: translateY(-1px);
+}
+
+/* ===== BOTONES ===== */
+button,
+.action-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  display: inline-block;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+button:hover,
+.action-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button:active,
+.action-btn:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Variantes de botones */
+#addItemBtn,
+#countBtn,
+#addBtn,
+#subBtn,
+#mulBtn,
+#divBtn {
+  background: var(--primary-color);
+}
+
+#addItemBtn:hover,
+#countBtn:hover,
+#addBtn:hover,
+#subBtn:hover,
+#mulBtn:hover,
+#divBtn:hover {
+  background: var(--primary-dark);
+}
+
+/* ===== INPUTS Y FORMULARIOS ===== */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--light-bg);
+  color: var(--text-primary);
+  transition: var(--transition);
+  font-family: inherit;
+  margin-bottom: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ===== CONTENIDO DE EJERCICIOS ===== */
+.exercise-content {
+  background: var(--light-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== LISTAS ===== */
+ul,
+ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/* ===== BOTÓN X DE TAREAS (EJERCICIO 9) ===== */
+#taskList {
+  list-style: none;
+}
+
+#taskList li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  border-left: 3px solid var(--primary-color);
+  color: var(--text-secondary);
+}
+
+#taskList li::before {
+  content: "●";
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+#taskList button {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.6rem;
+  margin-left: auto;
+  border-radius: 4px;
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+#taskList button:hover {
+  background: var(--danger-color);
+  transform: scale(1.1);
+}
+
+#itemList {
+  background: var(--light-bg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  list-style-position: inside;
+}
+
+#itemList li {
+  padding: 0.75rem;
+  background: white;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  border-left: 3px solid var(--primary-color);
+  padding-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== RESULTADOS Y OUTPUTS ===== */
+#counter,
+#result {
+  background: var(--light-bg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+/* ===== ENLACES DE VOLVER ===== */
+.back {
+  display: inline-block;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.back a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back a:hover {
+  color: var(--primary-dark);
+  transform: translateX(-3px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-content {
+    padding: 1.5rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  button {
+    width: 100%;
+  }
+
+  button {
+    margin: 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  button,
+  .action-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.5s ease;
+}
+
+/* ===== UTILITIES ===== */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+.mt-2 {
+  margin-top: 1rem;
+}
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+.mb-2 {
+  margin-bottom: 1rem;
+}
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+.p-2 {
+  padding: 1rem;
+}
+.p-3 {
+  padding: 1.5rem;
+}
