@@ -1,31 +1,31 @@
-# 📘 Entrega de Ejercicios JavaScript  
+# 📘 Entrega de Ejercicios ReactJS  
 ### Máster en Desarrollo Web Full Stack – Conquer Blocks
 
 ## 👤 Alumno
 **Silvano Puccini**
 
 ## 📚 Módulo
-JavaScript – Fundamentos, DOM, Eventos y Persistencia
+ReactJS – Fundamentos, Componentes, Hooks y Persistencia
 
 ---
 
 ## 🌐 Demo en vivo (GitHub Pages)
 
 🔗 **URL pública del proyecto:**  
-https://silvanopuccini.github.io/js-ejercicios/
+https://silvanopuccini.github.io/ReactJS-Ejercicios/
 
 ---
 
 ## 🎯 Objetivo del proyecto
 
-Este trabajo corresponde a la **Entrega de Ejercicios 1** del módulo de JavaScript del Máster en Desarrollo Web Full Stack.
+Este trabajo corresponde a la **Entrega de Ejercicios 1** del módulo de ReactJS del Máster en Desarrollo Web Full Stack.
 
-El objetivo es **consolidar los conocimientos fundamentales de JavaScript** mediante ejercicios prácticos que cubren:
+El objetivo es **consolidar los conocimientos fundamentales de ReactJS** mediante ejercicios prácticos que cubren:
 
-- Manipulación del DOM
-- Manejo de eventos
-- Lógica condicional
-- Creación dinámica de elementos
+- Componentes y JSX
+- Manejo de eventos en React
+- Estado y Hooks
+- Renderizado dinámico de listas
 - Persistencia de datos con `localStorage`
 - Buenas prácticas de separación HTML / CSS / JS
 - Estructura profesional de proyecto
@@ -35,7 +35,7 @@ El objetivo es **consolidar los conocimientos fundamentales de JavaScript** medi
 ## 🗂️ Estructura del proyecto
 El proyecto sigue una estructura clara y escalable, respetando la consigna y aplicando buenas prácticas vistas en el máster:
 ```
-JS-EJERCICIOS [MSL-UBUNTU]/
+REACTJS-EJERCICIOS [MSL-UBUNTU]/
 │
 ├── src/
 │   ├── css/
@@ -108,13 +108,13 @@ JS-EJERCICIOS [MSL-UBUNTU]/
 ## 🛠 Tecnologías utilizadas
 - HTML5  
 - CSS3  
-- JavaScript (ES6)  
+- ReactJS (UMD + Babel)  
 
 ## 🚀 Despliegue
 
 El proyecto se encuentra desplegado en **GitHub Pages**, cumpliendo con el requisito de enlace público para su corrección.
 
-🔗 https://silvanopuccini.github.io/js-ejercicios/
+🔗 https://silvanopuccini.github.io/ReactJS-Ejercicios/
 
 ---
 
@@ -128,4 +128,3 @@ El proyecto se encuentra desplegado en **GitHub Pages**, cumpliendo con el requi
 ---
 **Autor:** Silvano Puccini  
 **Academia:** Conquer Blocks Máster en Desarrollo Web Full Stack 
-
