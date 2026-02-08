@@ -1,64 +1,94 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("taskInput");
-  const addBtn = document.getElementById("addTaskBtn");
-  const clearBtn = document.getElementById("clearCompletedBtn");
-  const list = document.getElementById("taskList");
+const { useEffect, useMemo, useState } = React;
 
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+const getStoredTasks = () => {
+  const stored = localStorage.getItem("tasks");
+  return stored ? JSON.parse(stored) : [];
+};
 
-  const saveTasks = () => {
+const App = () => {
+  const [tasks, setTasks] = useState(() => getStoredTasks());
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const addTask = () => {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return;
+    }
+    setTasks((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), text: trimmed, completed: false },
+    ]);
+    setValue("");
   };
 
-  const renderTasks = () => {
-    list.innerHTML = "";
-
-    tasks.forEach((task, index) => {
-      if (!task.text) return;
-      const li = document.createElement("li");
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = task.completed;
-
-      const span = document.createElement("span");
-      span.textContent = task.text;
-      if (task.completed) {
-        span.style.textDecoration = "line-through";
-        span.style.opacity = "0.6";
-      }
-
-      checkbox.addEventListener("change", () => {
-        tasks[index].completed = checkbox.checked;
-        saveTasks();
-        renderTasks();
-      });
-
-      li.appendChild(checkbox);
-      li.appendChild(span);
-      list.appendChild(li);
-    });
+  const toggleTask = (taskId) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task,
+      ),
+    );
   };
 
-  addBtn.addEventListener("click", () => {
-    const text = input.value.trim();
-    if (!text) return;
+  const clearCompleted = () => {
+    setTasks((prev) => prev.filter((task) => !task.completed));
+  };
 
-    tasks.push({
-      text: text,
-      completed: false,
-    });
+  const completedCount = useMemo(
+    () => tasks.filter((task) => task.completed).length,
+    [tasks],
+  );
 
-    input.value = "";
-    saveTasks();
-    renderTasks();
-  });
+  return (
+    <div className="container">
+      <div className="card">
+        <h1>Lista de Tareas</h1>
+        <p className="subtitle">Las tareas se guardan automáticamente</p>
+        <div className="exercise-content">
+          <input
+            type="text"
+            placeholder="Nueva tarea"
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+          />
+          <button type="button" className="action-btn" onClick={addTask}>
+            Agregar tarea
+          </button>
+        </div>
+        <ul id="taskList">
+          {tasks.map((task) => (
+            <li key={task.id}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => toggleTask(task.id)}
+              />
+              <span
+                style={
+                  task.completed
+                    ? { textDecoration: "line-through", opacity: 0.6 }
+                    : undefined
+                }
+              >
+                {task.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div className="exercise-content">
+          <button type="button" className="action-btn" onClick={clearCompleted}>
+            Limpiar tareas completadas ({completedCount})
+          </button>
+        </div>
+        <a href="index.html" className="back">
+          ← Volver al menú
+        </a>
+      </div>
+    </div>
+  );
+};
 
-  clearBtn.addEventListener("click", () => {
-    tasks = tasks.filter((task) => !task.completed);
-    saveTasks();
-    renderTasks();
-  });
-
-  renderTasks();
-});
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

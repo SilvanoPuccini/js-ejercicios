@@ -6,30 +6,17 @@
   <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
+  <div id="root"></div>
 
-  <div class="container">
-    <div class="card">
-      <h1>Lista de Tareas</h1>
-      <p class="subtitle">Las tareas se guardan automáticamente</p>
-
-      <div class="exercise-content">
-        <input type="text" id="taskInput" placeholder="Nueva tarea">
-        <button id="addTaskBtn" class="action-btn">Agregar tarea</button>
-      </div>
-
-      <ul id="taskList"></ul>
-
-      <div class="exercise-content">
-        <button id="clearCompletedBtn" class="action-btn">
-          Limpiar tareas completadas
-        </button>
-      </div>
-
-      <a href="index.html" class="back">← Volver al menú</a>
-    </div>
-  </div>
-
-  <script src="src/js/ejercicio9.js"></script>
+  <script
+    src="https://unpkg.com/react@18/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" src="src/js/ejercicio9.js"></script>
 </body>
 </html>
-

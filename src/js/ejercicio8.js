@@ -1,11 +1,38 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("textInput");
-  const words = document.getElementById("wordCount");
-  const chars = document.getElementById("charCount");
+const { useMemo, useState } = React;
 
-  input.addEventListener("input", () => {
-    const text = input.value.trim();
-    chars.textContent = text.length;
-    words.textContent = text ? text.split(/\s+/).length : 0;
-  });
-});
+const App = () => {
+  const [text, setText] = useState("");
+
+  const stats = useMemo(() => {
+    const trimmed = text.trim();
+    return {
+      chars: trimmed.length,
+      words: trimmed ? trimmed.split(/\s+/).length : 0,
+    };
+  }, [text]);
+
+  return (
+    <div className="container">
+      <div className="card">
+        <h1>Contador de Palabras</h1>
+        <textarea
+          rows="5"
+          cols="40"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+        ></textarea>
+        <p>
+          Palabras: <span>{stats.words}</span>
+        </p>
+        <p>
+          Caracteres: <span>{stats.chars}</span>
+        </p>
+        <a href="index.html" className="back">
+          ← Volver al menú
+        </a>
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

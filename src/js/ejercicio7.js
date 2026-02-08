@@ -1,23 +1,48 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const lengthInput = document.getElementById("lengthInput");
-  const generateBtn = document.getElementById("generateBtn");
-  const output = document.getElementById("password");
+const { useState } = React;
 
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+const characters =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
 
-  generateBtn.onclick = () => {
-    const length = Number(lengthInput.value);
-    if (length < 4) {
-      output.textContent = "Longitud mínima: 4";
+const App = () => {
+  const [length, setLength] = useState("");
+  const [password, setPassword] = useState("");
+
+  const generatePassword = () => {
+    const size = Number(length);
+    if (!size || size < 4) {
+      setPassword("Longitud mínima: 4");
       return;
     }
 
-    let pass = "";
-    for (let i = 0; i < length; i++) {
-      pass += chars[Math.floor(Math.random() * chars.length)];
+    let result = "";
+    for (let i = 0; i < size; i += 1) {
+      result += characters[Math.floor(Math.random() * characters.length)];
     }
-
-    output.textContent = pass;
+    setPassword(result);
   };
-});
+
+  return (
+    <div className="container">
+      <div className="card">
+        <h1>Generador de Contraseñas</h1>
+        <div className="exercise-content">
+          <input
+            type="number"
+            placeholder="Longitud"
+            value={length}
+            onChange={(event) => setLength(event.target.value)}
+          />
+          <button type="button" className="action-btn" onClick={generatePassword}>
+            Generar
+          </button>
+        </div>
+        {password && <p>{password}</p>}
+        <a href="index.html" className="back">
+          ← Volver al menú
+        </a>
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
