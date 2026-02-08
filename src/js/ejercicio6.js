@@ -1,36 +1,68 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const timeEl = document.getElementById("time");
-  const startBtn = document.getElementById("startBtn");
-  const stopBtn = document.getElementById("stopBtn");
-  const resetBtn = document.getElementById("resetBtn");
+const { useEffect, useRef, useState } = React;
 
-  let seconds = 0;
-  let interval = null;
+const formatTime = (totalSeconds) => {
+  const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const secs = String(totalSeconds % 60).padStart(2, "0");
+  return `${hrs}:${mins}:${secs}`;
+};
 
-  const formatTime = () => {
-    const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
-    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-    const secs = String(seconds % 60).padStart(2, "0");
-    timeEl.textContent = `${hrs}:${mins}:${secs}`;
-  };
+const App = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef(null);
 
-  startBtn.onclick = () => {
-    if (interval) return;
-    interval = setInterval(() => {
-      seconds++;
-      formatTime();
+  useEffect(() => {
+    if (!isRunning) {
+      return;
+    }
+
+    intervalRef.current = setInterval(() => {
+      setSeconds((prev) => prev + 1);
     }, 1000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    };
+  }, [isRunning]);
+
+  const handleStop = () => {
+    setIsRunning(false);
   };
 
-  stopBtn.onclick = () => {
-    clearInterval(interval);
-    interval = null;
+  const handleReset = () => {
+    setIsRunning(false);
+    setSeconds(0);
   };
 
-  resetBtn.onclick = () => {
-    clearInterval(interval);
-    interval = null;
-    seconds = 0;
-    formatTime();
-  };
-});
+  return (
+    <div className="container">
+      <div className="card">
+        <h1>Temporizador</h1>
+        <p id="time">{formatTime(seconds)}</p>
+        <div className="actions">
+          <button
+            type="button"
+            className="primary"
+            onClick={() => setIsRunning(true)}
+            disabled={isRunning}
+          >
+            Iniciar
+          </button>
+          <button type="button" className="secondary" onClick={handleStop}>
+            Detener
+          </button>
+          <button type="button" className="secondary" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
+        <a href="index.html" className="back">
+          ← Volver al menú
+        </a>
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

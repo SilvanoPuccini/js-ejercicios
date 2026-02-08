@@ -1,29 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const num1 = document.getElementById("num1");
-  const num2 = document.getElementById("num2");
-  const result = document.getElementById("result");
+const { useState } = React;
 
-  const addBtn = document.getElementById("addBtn");
-  const subBtn = document.getElementById("subBtn");
-  const mulBtn = document.getElementById("mulBtn");
-  const divBtn = document.getElementById("divBtn");
+const App = () => {
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
+  const [result, setResult] = useState("Resultado:");
 
-  if (!num1 || !num2 || !result || !addBtn || !subBtn || !mulBtn || !divBtn) {
-    console.error("❌ Algún botón o input no fue encontrado");
-    return;
-  }
+  const calculate = (operation) => {
+    const a = Number(num1);
+    const b = Number(num2);
 
-  const calculate = (op) => {
-    const a = Number(num1.value);
-    const b = Number(num2.value);
-
-    if (isNaN(a) || isNaN(b)) {
-      result.textContent = "Valores inválidos";
+    if (Number.isNaN(a) || Number.isNaN(b)) {
+      setResult("Valores inválidos");
       return;
     }
 
-    if (op === "/" && b === 0) {
-      result.textContent = "No se puede dividir por cero";
+    if (operation === "/" && b === 0) {
+      setResult("No se puede dividir por cero");
       return;
     }
 
@@ -34,11 +26,48 @@ document.addEventListener("DOMContentLoaded", () => {
       "/": a / b,
     };
 
-    result.textContent = `Resultado: ${operations[op]}`;
+    setResult(`Resultado: ${operations[operation]}`);
   };
 
-  addBtn.onclick = () => calculate("+");
-  subBtn.onclick = () => calculate("-");
-  mulBtn.onclick = () => calculate("*");
-  divBtn.onclick = () => calculate("/");
-});
+  return (
+    <div className="container">
+      <div className="card">
+        <h1>Calculadora</h1>
+        <div className="exercise-content">
+          <input
+            type="number"
+            placeholder="Número 1"
+            value={num1}
+            onChange={(event) => setNum1(event.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Número 2"
+            value={num2}
+            onChange={(event) => setNum2(event.target.value)}
+          />
+        </div>
+        <div className="actions">
+          <button type="button" onClick={() => calculate("+")}>
+            Sumar
+          </button>
+          <button type="button" onClick={() => calculate("-")}>
+            Restar
+          </button>
+          <button type="button" onClick={() => calculate("*")}>
+            Multiplicar
+          </button>
+          <button type="button" onClick={() => calculate("/")}>
+            Dividir
+          </button>
+        </div>
+        <p id="result">{result}</p>
+        <a href="index.html" className="back">
+          ← Volver al menú
+        </a>
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
